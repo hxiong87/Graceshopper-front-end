@@ -5,6 +5,7 @@ export const Register = () => {
     const [password, setPassword] = useState();
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("this is registration", setEmail, setPassword)
     //     const userObj = await registerUser({
     //       user: {username,
     //       password}
@@ -26,9 +27,10 @@ export const Register = () => {
         <form onSubmit={handleSubmit} class="registerForm">
       
 
-          
+          {/* add name input
+          we will display  */}
               <input 
-                type="text" 
+                type="email" 
                 onChange={(event) => setEmail(event.target.value)} 
                 placeholder="Enter Email"
               />

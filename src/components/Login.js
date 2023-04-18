@@ -7,6 +7,7 @@ export const Login = () => {
     const handleSubmit = async (event) => {
 
         event.preventDefault();
+        console.log("this is login",email, password)
         // const userObj = await loginUser({
         //   email,
         //   password

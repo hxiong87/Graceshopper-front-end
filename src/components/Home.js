@@ -1,16 +1,16 @@
 import React from "react";
-import image from '/Users/leeka/graceshopper-front-end/src/css/1158SFP.png'
+//import image from 'publichomeimage.png';
 
 export const Home = () => {
 
     return (
-        <div className="homeImg">
+    //     <div className="homeImg">
       
-        <img clasName="img" src={image} alt="home backgroud img" />
+    //     <img clasName="img" src={image} alt="home backgroud img" />
 
   
-
+<h1>hello</h1>
             
-        </div>
-    )
+    //     </div>
+     )
 }
