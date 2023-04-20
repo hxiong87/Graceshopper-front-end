@@ -1,5 +1,28 @@
 import React, { useState } from "react";
-// import loginUser from './api'
+
+
+async function loginUser(credentials) {
+    console.log(credentials)
+    return fetch('https://graceshopper-0xzy.onrender.com/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        if (result.message === "User does not exist") {
+          window.alert("Username does not exist")
+        }
+        if (result.message === "Password is incorrect") {
+          window.alert("Password incorrect")
+        }
+        return result
+      })
+      .catch(console.error);
+  }
 
 export const Login = () => {
     const [email, setEmail] = useState('');
@@ -8,14 +31,14 @@ export const Login = () => {
 
         event.preventDefault();
         console.log("this is login",email, password)
-        // const userObj = await loginUser({
-        //   email,
-        //   password
-        // });
+        const userObj = await loginUser({
+          email,
+          password
+        });
         
-        // console.log("login userObj", userObj.token, userObj.user.email)
-        // window.localStorage.setItem('token', userObj.token)
-        //window.location.assign("/profile")
+        console.log("login userObj", userObj.token, userObj.user.email)
+        window.localStorage.setItem('token', userObj.token)
+        window.location.assign("/profile")
     
       
     }

@@ -1,20 +1,52 @@
 import React, { useState } from "react";
 
+
+async function registerUser(credentials) {
+  console.log(credentials)
+  const {email, password} = credentials.user
+  console.log("The register user function", email, password)
+  try {
+  const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/users/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        email: email,
+        password: password
+    })
+  })
+      const result = await response.json()
+      console.log(result)
+      if (result.error === "Duplicate Username") {
+        window.alert("Username is already taken")
+      }
+      if (result.error === "Short password") {
+        window.alert("Password Too Short")
+      }
+      return result
+    } catch (error) {
+      console.log(error)
+    }
+}
+
 export const Register = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("this is registration", setEmail, setPassword)
-    //     const userObj = await registerUser({
-    //       user: {username,
-    //       password}
-    //     });
+        console.log("this is registration component", setEmail, setPassword)
+        const userObj = await registerUser({
+          user: {email,
+          password}
+        });
         
-        // console.log("Resgister user ob", userObj.token, userObj.user.username)
+        console.log("Register user ob", userObj.token, userObj.user.email)
     alert("Registration Successful!")
-    setEmail("")
-    setPassword("")
+    // setEmail(userObj.user.email)
+    // setPassword("")
+    window.localStorage.setItem('token', userObj.token)
+    window.location.assign("/profile")
 
 
 

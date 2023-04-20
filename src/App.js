@@ -10,6 +10,8 @@ import {
   Register,
   Profile,
   SingleProductView,
+  Admin,
+  Products
 } from './components';
 
 function App() {
@@ -51,6 +53,10 @@ function App() {
             <Route
               path='/'
               element={<Home />}/>
+
+            <Route 
+              path='/products' 
+              element={<Products />}/>
            
             <Route
               path='/login'
@@ -63,6 +69,10 @@ function App() {
             <Route
               path='/profile'
               element={<Profile />}/>
+
+            <Route 
+              path='/admin' 
+              element={<Admin />}/>
 
             <Route
               path='/products:productId'
