@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, Link, useNavigate  } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -23,21 +23,80 @@ async function addNewProduct(postObj, userToken) {
     .catch(console.error);
 }
 
+async function fetchAllUsers() {
+  try {
+    const resp = await fetch(`https://graceshopper-0xzy.onrender.com/api/users`);
+    const result = await resp.json();
+
+    if (result.error) {
+      throw result.error;
+    }
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateUser({ userId, obj, token }) {
+
+  try {
+      const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/${userId}`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+          },
+        body: JSON.stringify(obj)
+      })
+      const result = await response.json();
+      if (result.error) {
+          throw result.error;
+      }
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+}
+
 export const Admin = () => {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
   const [inventory, setInventory] = useState();
   const [petType, setPetType] = useState();
+  const [users, setUsers] = useState([]);
+  const [userId, setUserId] = useState();
+  const [isEngineer, setIsEngineer] = useState();
+  const [isAdmin, setIsAdmin] = useState();
+  const token = window.localStorage.getItem('token')
   const handleSubmit = async event => {
-    const token = window.localStorage.getItem('token')
       event.preventDefault();
       const obj = {
           title, description, price, inventory, petType
       }
       await addNewProduct(obj, token)
   }
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const result = await fetchAllUsers();
+      setUsers(result);
+    }
+    fetchData();
+  })
+
+  const handleUser = async (event) => {
+    event.preventDefault();
+    console.log("event target", event.target[3].value)
+    setUserId(event.target[3].value);
+    console.log('userId', userId);
+    const obj = { isEngineer, isAdmin };
+    console.log("updateUser", userId, obj, token)
+    await updateUser(userId, obj, token);
+  }
+
   return (
+    <div>
       <form onSubmit={handleSubmit} class="login">
         <label>
           <p>Name</p>
@@ -63,6 +122,37 @@ export const Admin = () => {
           <button type="submit">Create New Product</button>
         </div>
       </form>
+      
+      <div>
+        { users.map((user) => (
+          <div key={user.id} className='users'>
+              <h4>
+                Email {user.email}
+              </h4>
+              <div>
+                Engineer {user.engineer ? `Yes` : `No`}
+              </div>
+              <div>
+                Admin {user.admin ? `Yes` : `No`}                  
+              </div>
+              <form onSubmit={handleUser}>
+                <div>
+                  <label>
+                    <p>Engineer</p>
+                    <input type='checkbox' onChange={event => setIsEngineer(event.target.value)}/>
+                  </label>
+                  <label>
+                    <p>Admin</p>
+                    <input type='checkbox' onChange={event => setIsAdmin(event.target.value)}/>
+                  </label>
+                </div>
+                <button type='submit'>Click TWICE to Submit</button>
+                <input value={user.id} className="hidden"/>
+              </form>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 

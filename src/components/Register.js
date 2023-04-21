@@ -30,7 +30,7 @@ async function registerUser(credentials) {
     }
 }
 
-export const Register = () => {
+export const Register = ({ user, setUser }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const handleSubmit = async (event) => {
@@ -48,7 +48,7 @@ export const Register = () => {
     window.localStorage.setItem('token', userObj.token)
     window.location.assign("/profile")
 
-
+    setUser(userObj.user.email);
 
     }
     return(
