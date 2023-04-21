@@ -9,4 +9,4 @@ export { Register } from './Register';
 export { Cart } from './Cart';
 export { SingleProductView } from './SingleProductView';
 export { Checkout } from './Checkout';
-export { Admin } from ' ./Admin';
+export { Admin } from './Admin';
