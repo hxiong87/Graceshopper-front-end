@@ -1,5 +1,5 @@
 import React from "react";
-import image from './/profile_img.png';
+import { API_URL } from '../config';
 
 export const Profile = () => {
     return (
@@ -12,7 +12,7 @@ export const Profile = () => {
   </div>
 
   <div class="item3">
-  <img clasName="img" src={image} alt="home backgroud img" />
+  <img clasName="img" src='./profile_img.png' alt="home backgroud img" />
   {/* include purchase history and edit user  */}
   </div>
     </div>

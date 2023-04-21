@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import { API_URL } from '../config';
 
 const fetchAllProducts = async () => {
     try {
-        const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/products`);
+        const response = await fetch(`${API_URL}/products`);
         const result = await response.json();
         if (result.error) {
             throw result.error;
@@ -46,7 +46,7 @@ export const Products = ({ token }) => {
                     <h4>Product Inventory: </h4>
                    <p>{product.inventory}</p>
                    <h4>Pet Type: </h4>
-                   <p>{product.type}</p>
+                   <p>{product.petType}</p>
                   
                 </div> 
             </div>

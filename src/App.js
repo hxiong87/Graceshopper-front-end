@@ -1,4 +1,3 @@
-
 import './App.css'
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -11,13 +10,15 @@ import {
   Profile,
   SingleProductView,
   Admin,
-  Products
+  Products,
+  Loading
 } from './components';
 
 function App() {
   const [token, setToken] = useState("");
   const [user, setUser] = useState("");
-  const [isLoggedIn, setIsLoggedIn] =useState(true);
+  const [isLoggedIn, setIsLoggedIn] =useState(false);
+  // const [ isLoading, setIsLoading ] = useState(false);
   
   function logout() {
     window.localStorage.removeItem('token');
@@ -33,7 +34,7 @@ function App() {
       if (localStorage.getItem("token")) {
           setIsLoggedIn(true);
       }
-    }, []);
+    }, [isLoggedIn]);
 
 
 
@@ -45,7 +46,7 @@ function App() {
       <div>
         <Header/> 
         <Navbar isLoggedIn={isLoggedIn} logout={logout}/>
-  
+        {/* {isLoading ? <Loading/> : null} */}
        </div>
     <div className='main'>
       <main>
