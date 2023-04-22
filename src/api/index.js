@@ -1,12 +1,13 @@
-const BASE_URL = 'https://graceshopper-0xzy.onrender.com/'
+import { API_URL } from '../config';
 
 //Post /users/register
+
 export async function registerUser(credentials) {
     console.log(credentials)
     const {email, password} = credentials.user
     console.log("AAAAAAAAA", email, password)
     try {
-    const response = await fetch(`${BASE_URL}/api/users/register`, {
+    const response = await fetch(`${API_URL}/api/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

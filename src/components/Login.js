@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-
+import { API_URL } from '../config';
 
 async function loginUser(credentials) {
     console.log(credentials)
-    return fetch('https://graceshopper-0xzy.onrender.com/api/users/login', {
+    return fetch(`${API_URL}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ export const Login = ({ user, setUser }) => {
     const handleSubmit = async (event) => {
 
         event.preventDefault();
-        console.log("this is login",email, password)
+        console.log("this is login", email, password)
         const userObj = await loginUser({
           email,
           password
@@ -57,10 +57,10 @@ export const Login = ({ user, setUser }) => {
                 <br></br>  
 
                 <input 
-                 type="password"
-                 minLength={8} required 
-                 placeholder="Enter Password"
-                 onChange={(event) => setPassword(event.target.value)} 
+                    type="password"
+                    minLength={8} required 
+                    placeholder="Enter Password"
+                    onChange={(event) => setPassword(event.target.value)} 
                  />
               
                  <button type="submit">LOGIN</button>

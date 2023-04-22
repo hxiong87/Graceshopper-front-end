@@ -15,8 +15,8 @@ export const Navbar = ({ isLoggedIn, logout }) => {
                 <ul className="leftside-link">
                     <Link className='home' to='/'>Home</Link>
                     <Link className="products" to='/products'>Products</Link>
-                     <Link className="profile" to='/profile'>Profile</Link>
-                     <Link className="admin-tab" to='/admin'>Admin</Link>
+                    <Link className="profile" to='/profile'>Profile</Link>
+                    {isLoggedIn && <Link className="admin-tab" to='/admin'>Admin</Link>}
                 </ul>  
                 </div>
                 <div className="logo">

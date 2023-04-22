@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-
+import { API_URL } from '../config';
 
 async function registerUser(credentials) {
   console.log(credentials)
   const {email, password} = credentials.user
   console.log("The register user function", email, password)
   try {
-  const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/users/register`, {
+  const response = await fetch(`${API_URL}/users/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

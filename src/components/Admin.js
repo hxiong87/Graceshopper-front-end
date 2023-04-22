@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+
+import React, { useState, useEffect }  from 'react';
 import { Route, Routes, Link, useNavigate  } from 'react-router-dom';
-import { useState } from 'react';
+import { API_URL } from '../config';
 
 async function addNewProduct(postObj, userToken) {
   console.log("AAAAAAAAAAAAAAA", postObj, userToken)
-  return fetch('https://graceshopper-0xzy.onrender.com/api/products', {
+  return fetch(`${API_URL}/products`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,6 +23,8 @@ async function addNewProduct(postObj, userToken) {
     })
     .catch(console.error);
 }
+
+
 
 async function fetchAllUsers() {
   try {
@@ -57,6 +60,7 @@ async function updateUser({ userId, obj, token }) {
       console.error(error);
     }
 }
+
 
 export const Admin = () => {
   const [title, setTitle] = useState();
@@ -100,26 +104,49 @@ export const Admin = () => {
       <form onSubmit={handleSubmit} class="login">
         <label>
           <p>Name</p>
-          <input type="text" onChange={event => setTitle(event.target.value)} placeholder="Name..."/>
+          <input 
+            type="text" 
+            onChange={event => setTitle(event.target.value)} 
+            placeholder="Name..."
+          />
         </label>
         <label>
           <p>Description</p>
-          <input type="text" onChange={event => setDescription(event.target.value)} placeholder="Description..."/>
+          <input 
+            type="text" 
+            onChange={event => setDescription(event.target.value)} 
+            placeholder="Description..."
+          />
         </label>
         <label>
           <p>Price</p>
-          <input type="number" onChange={event => setPrice(event.target.value)} placeholder="Price..."/>
+          <input 
+            type="number" 
+            onChange={event => setPrice(event.target.value)} 
+            placeholder="Price..."
+          />
         </label>
         <label>
           <p>Inventory</p>
-          <input type="number" onChange={event => setInventory(event.target.value)} placeholder="Inventory..."/>
+          <input 
+            type="number" 
+            onChange={event => setInventory(event.target.value)} 
+            placeholder="Inventory..."
+          />
         </label>
         <label>
           <p>Pet Type</p>
-          <input type="text" onChange={event => setPetType(event.target.value)} placeholder="Pet Type..."/>
+          <input 
+            type="text" 
+            onChange={event => setPetType(event.target.value)} 
+            placeholder="Pet Type..."
+          />
         </label>
         <div>
-          <button type="submit">Create New Product</button>
+          <button 
+            type="submit">
+              Create New Product
+          </button>
         </div>
       </form>
       

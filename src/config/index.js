@@ -1,0 +1,1 @@
+export const API_URL = `https://graceshopper-0xzy.onrender.com/api`

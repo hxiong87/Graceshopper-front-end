@@ -1,5 +1,5 @@
 import React from "react";
-import image from './/shopping.jpeg'
+import { API_URL } from '../config';
 
 export const SingleProductView = () => {
     return (
@@ -16,7 +16,7 @@ export const SingleProductView = () => {
 
   <div class="item5">
     <div className="item-img">
-  <img clasName="SPV-img" src={image} alt="home backgroud img" style={{width: '300px'}}/>
+  <img clasName="SPV-img" src='./shopping.jpeg' alt="home backgroud img" style={{width: '300px'}}/>
   </div>
    just displaying description and photo
   </div>
