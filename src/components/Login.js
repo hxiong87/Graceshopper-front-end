@@ -24,7 +24,7 @@ async function loginUser(credentials) {
       .catch(console.error);
   }
 
-export const Login = () => {
+export const Login = ({ user, setUser }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleSubmit = async (event) => {
@@ -40,7 +40,7 @@ export const Login = () => {
         window.localStorage.setItem('token', userObj.token)
         window.location.assign("/profile")
     
-      
+      setUser(userObj.user.email);
     }
     return(
       <div className="login-container">

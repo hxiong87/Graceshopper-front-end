@@ -12,6 +12,7 @@ import {
   Admin,
   Products,
   Loading
+  Cart
 } from './components';
 
 function App() {
@@ -61,11 +62,11 @@ function App() {
            
             <Route
               path='/login'
-              element={<Login />}/>
+              element={<Login user={user} setUser={setUser}/>}/>
 
             <Route
               path='/register'
-              element={<Register />}/>
+              element={<Register user={user} setUser={setUser}/>}/>
 
             <Route
               path='/profile'
@@ -78,6 +79,10 @@ function App() {
             <Route
               path='/products:productId'
               element={<SingleProductView />}/> 
+
+            <Route
+              path='/cart'
+              element={<Cart user={user}/>}/>
 
         </Routes>
       </main>
