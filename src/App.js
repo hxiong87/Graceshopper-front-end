@@ -11,7 +11,7 @@ import {
   SingleProductView,
   Admin,
   Products,
-  Loading
+  Loading,
   Cart
 } from './components';
 
