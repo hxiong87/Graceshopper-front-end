@@ -37,7 +37,7 @@ export const Products = ({ token }) => {
         return products.map((product) => (
             <div key={product.id} class="product" className="routines-contianer">
                 <div>
-                <img src={product.url} alt={product.title} />
+                <img src={product.pictureUrl} alt={product.title} />
                     <h1>{product.title}</h1>
                     <h4>Price: </h4>
                     <p>{product.price}</p>
@@ -48,6 +48,7 @@ export const Products = ({ token }) => {
                    <h4>Pet Type: </h4>
                    <p>{product.petType}</p>
                    <div>{product.url ? product.url : "Picture"}</div>
+                   <img src={`${product.url}`} alt={""}/>
                   
                 </div> 
             </div>

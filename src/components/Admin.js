@@ -80,7 +80,7 @@ export const Admin = () => {
   const handleSubmit = async event => {
       event.preventDefault();
       const obj = {
-          title, description, price, inventory, petType, url
+          title, description, price, inventory, petType, url: url
       }
       await addNewProduct(obj, token)
   }
