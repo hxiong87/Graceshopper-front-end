@@ -24,6 +24,7 @@ async function registerUser(credentials) {
       if (result.error === "Short password") {
         window.alert("Password Too Short")
       }
+      console.log("IIIIIIIIIIII", result)
       return result
     } catch (error) {
       console.log(error)
@@ -46,10 +47,11 @@ export const Register = ({ user, setUser }) => {
     // setEmail(userObj.user.email)
     // setPassword("")
     window.localStorage.setItem('token', userObj.token)
-    window.location.assign("/profile")
-
-    setUser(userObj.user.email);
-
+    window.localStorage.setItem('userEmail', userObj.user.email)
+    window.localStorage.setItem('userId', userObj.user.id)
+    console.log("FFFFFFFFFFFFF", userObj)
+    setUser([userObj.user.email, userObj.user.id]);
+    // window.location.assign("/profile")
     }
     return(
       <div className="registration-container">

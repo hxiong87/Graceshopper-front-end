@@ -49,7 +49,7 @@ console.log("ZZZZZZZZZZZZZZZZZZZZ", JSON.stringify(obj))
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
-          },
+          }, 
         body: JSON.stringify(obj)
       })
       console.log("OOOOOOOOOOOOO", response)
