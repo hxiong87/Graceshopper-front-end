@@ -38,9 +38,10 @@ export const Login = ({ user, setUser }) => {
         
         console.log("login userObj", userObj.token, userObj.user.email)
         window.localStorage.setItem('token', userObj.token)
-        window.location.assign("/profile")
-    
-      setUser(userObj.user.email);
+        window.localStorage.setItem('userEmail', userObj.user.email)
+        window.localStorage.setItem('userId', userObj.user.id)
+      setUser([userObj.user.email, userObj.user.id]);
+      // window.location.assign("/profile")
     }
     return(
       <div className="login-container">
