@@ -76,9 +76,9 @@ function App() {
               path='/admin' 
               element={<Admin />}/>
 
-            <Route
-              path='/products:productId'
-              element={<SingleProductView />}/> 
+            {/* <Route
+              path='/products/:productId'
+              element={<SingleProductView />}/>  */}
 
             <Route
               path='/cart'

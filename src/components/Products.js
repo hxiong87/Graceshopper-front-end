@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { API_URL } from '../config';
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
+import { SingleProductView } from "./SingleProductView";
 
 const fetchAllProducts = async () => {
     try {
@@ -77,9 +78,9 @@ export const Products = () => {
     
         useEffect(() => {
             const fetchProducts = async () => {
-              const products = await fetchAllProducts();
-              console.log("These are the products", products)
-              setProducts(products);
+              const prod = await fetchAllProducts();
+              console.log("These are the products", prod)
+              setProducts(prod);
     
             };
         
@@ -101,7 +102,10 @@ export const Products = () => {
             <div key={product.id} class="product" className="product-container">
                 <div>
                 <img src={product.url} alt={product.title} />
-                    <Link to={`/products/${product.id}`}>{product.title}</Link>
+                <Link to={`/products/${product.id}`}>{product.title}</Link>
+                    <Routes>
+                      <Route path={`/products/${product.id}`} element={<SingleProductView/>}></Route>
+                    </Routes>
                     <h4>Price: </h4>
                     <p>{product.price}</p>
                     <h4>Description: </h4>
