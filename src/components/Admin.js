@@ -24,6 +24,23 @@ async function addNewProduct(postObj, userToken) {
     .catch(console.error);
 }
 
+async function updateProduct(productId, obj, token) {
+  console.log("updateProduct", productId, obj, token);
+  return fetch(`${API_URL}/products/${productId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(obj)
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log("TTTTTTT", result);
+     return result
+  })
+  .catch(console.error);
+}
 
 
 async function fetchAllUsers() {
@@ -76,6 +93,7 @@ export const Admin = () => {
   const [isEngineer, setIsEngineer] = useState();
   const [isAdmin, setIsAdmin] = useState();
   const [url, setURL] = useState();
+  const [productId, setProductId] = useState();
   const token = window.localStorage.getItem('token')
   const handleSubmit = async event => {
       event.preventDefault();
@@ -102,6 +120,23 @@ export const Admin = () => {
     console.log("updateUser", userId, obj, token)
     const updated = await updateUser(userId, obj, token);
     return updated
+  }
+
+  const handleEdit = async (event) => {
+    event.preventDefault();
+    console.log("events", event.target[0].value);
+    setProductId(event.target[0].value);
+    const obj = {
+      id: productId,
+      title,
+      description, 
+      price,
+      inventory,
+      petType,
+      url
+    }
+    const updatedProduct = await updateProduct(productId, obj, token);
+    return updatedProduct;
   }
 
   return (
@@ -162,7 +197,70 @@ export const Admin = () => {
           </button>
         </div>
       </form>
-      
+      <div>
+        <form onSubmit={handleEdit}>
+          <label>
+            <p>Product Id</p>
+            <input
+            type='text'
+            onChange={event => setProductId(event.target.value)}
+            placeholder='Enter Product Id'
+            />
+          </label>
+          <label>
+          <p>Name</p>
+          <input 
+            type="text" 
+            onChange={event => setTitle(event.target.value)} 
+            placeholder="Name..."
+          />
+        </label>
+        <label>
+          <p>Description</p>
+          <input 
+            type="text" 
+            onChange={event => setDescription(event.target.value)} 
+            placeholder="Description..."
+          />
+        </label>
+        <label>
+          <p>Price</p>
+          <input 
+            type="number" 
+            onChange={event => setPrice(event.target.value)} 
+            placeholder="Price..."
+          />
+        </label>
+        <label>
+          <p>Inventory</p>
+          <input 
+            type="number" 
+            onChange={event => setInventory(event.target.value)} 
+            placeholder="Inventory..."
+          />
+        </label>
+        <label>
+          <p>Pet Type</p>
+          <input 
+            type="text" 
+            onChange={event => setPetType(event.target.value)} 
+            placeholder="Pet Type..."
+          />
+        </label>
+        <label>
+          <p>Image URL (Does not work yet)</p>
+          <input 
+            type="text" 
+            onChange={event => setURL(event.target.value)} 
+            placeholder="URL Link..."
+          />
+        </label>
+        <button 
+            type="submit">
+              Edit Product
+          </button>
+        </form>
+      </div>
       <div>
         { users.map((user) => (
           <div key={user.id} className='users'>
