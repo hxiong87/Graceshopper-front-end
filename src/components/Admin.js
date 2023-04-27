@@ -41,10 +41,12 @@ async function fetchAllUsers() {
 }
 
 async function updateUser( userId, obj, token ) {
+
+
 console.log("YYYYYYYYYYYYYYY", userId, obj, token)
 console.log("ZZZZZZZZZZZZZZZZZZZZ", JSON.stringify(obj))
   try {
-      const response = await fetch(`${API_URL}/users/${userId}`, {
+
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +59,9 @@ console.log("ZZZZZZZZZZZZZZZZZZZZ", JSON.stringify(obj))
       if (result.error) {
           throw result.error;
       }
+
       console.log("PPPPPPPPPPPPPP", result)
+
       return result;
     } catch (error) {
       console.error(error);
@@ -77,6 +81,7 @@ export const Admin = () => {
   const [isAdmin, setIsAdmin] = useState();
   const [url, setURL] = useState();
   const token = window.localStorage.getItem('token')
+  
   const handleSubmit = async event => {
       event.preventDefault();
       const obj = {
@@ -93,6 +98,21 @@ export const Admin = () => {
     fetchData();
   })
 
+  // if (admin == 'on')  {
+  //   setIsAdmin(true)
+  // } else {
+  //   setIsAdmin(false)
+  // }
+
+  // if (engineer == 'on') {
+  //   setIsEngineer(true)
+  // } else {
+  //   setIsEngineer(false)
+  // }
+
+
+
+
   const handleUser = async (event) => {
     event.preventDefault();
     console.log("event target", event.target[3].value)
@@ -102,6 +122,7 @@ export const Admin = () => {
     console.log("updateUser", userId, obj, token)
     const updated = await updateUser(userId, obj, token);
     return updated
+
   }
 
   return (
@@ -171,10 +192,12 @@ export const Admin = () => {
                 Email: {user.email}
               </h4>
               <div>
-                Engineer: {user.engineer ? `Yes` : `No`}
+
+                Engineer {user.engineer ? "Yes" : "No" } 
               </div>
               <div>
-                Admin: {user.admin ? `Yes` : `No`}                  
+                Admin {user.admin ? "Yes" : "No"}                  
+
               </div>
               <form onSubmit={handleUser}>
                 <div>
