@@ -4,7 +4,7 @@ import { API_URL } from '../config';
 
 const fetchUserOrder = async ( username, token ) => {
     try {
-        const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/${username}/order`, {
+        const response = await fetch(`${API_URL}/${username}/order`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

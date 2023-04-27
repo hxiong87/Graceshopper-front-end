@@ -48,7 +48,7 @@ function App() {
         <Header/> 
         <Navbar isLoggedIn={isLoggedIn} logout={logout}/>
         {/* {isLoading ? <Loading/> : null} */}
-       </div>
+      </div>
     <div className='main'>
       <main>
         <Routes>
