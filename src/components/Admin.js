@@ -28,7 +28,7 @@ async function addNewProduct(postObj, userToken) {
 
 async function fetchAllUsers() {
   try {
-    const resp = await fetch(`https://graceshopper-0xzy.onrender.com/api/users`);
+    const resp = await fetch(`${API_URL}/users`);
     const result = await resp.json();
 
     if (result.error) {
@@ -44,7 +44,7 @@ async function updateUser( userId, obj, token ) {
 console.log("YYYYYYYYYYYYYYY", userId, obj, token)
 console.log("ZZZZZZZZZZZZZZZZZZZZ", JSON.stringify(obj))
   try {
-      const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/users/${userId}`, {
+      const response = await fetch(`${API_URL}/users/${userId}`, {
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ export const Admin = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} class="login">
+      <form onSubmit={handleSubmit} class="login" className='add-product'>
         <label>
           <p>Name</p>
           <input 
@@ -150,7 +150,7 @@ export const Admin = () => {
         <label>
           <p>Image URL (Does not work yet)</p>
           <input 
-            type="text" 
+            type="url" 
             onChange={event => setURL(event.target.value)} 
             placeholder="URL Link..."
           />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API_URL } from '../config';
+import { Link } from "react-router-dom";
 
 const fetchAllProducts = async () => {
     try {
@@ -14,10 +15,12 @@ const fetchAllProducts = async () => {
       }
 };
 
+
 const addProduct = async (obj, productId, token) => {
   console.log("Add Product Vriables", productId, obj, token)
+
   try {
-    const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/orders/${productId}/users`, {
+    const response = await fetch(`${API_URL}/orders/${productId}/users`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -94,10 +97,10 @@ export const Products = () => {
    
           
         return products.map((product) => (
-            <div key={product.id} class="product" className="routines-contianer">
+            <div key={product.id} class="product" className="product-container">
                 <div>
-                <img src={product.pictureUrl} alt={product.title} />
-                    <h1>{product.title}</h1>
+                <img src={product.url} alt={product.title} />
+                    <Link to={`/products/${product.id}`}>{product.title}</Link>
                     <h4>Price: </h4>
                     <p>{product.price}</p>
                     <h4>Description: </h4>
@@ -106,12 +109,14 @@ export const Products = () => {
                     <p>{product.inventory}</p>
                     <h4>Pet Type: </h4>
                     <p>{product.petType}</p>
-                    <div>{product.url ? product.url : "Picture"}</div>
+                    {/* <div>{product.url ? product.url : "Picture"}</div> */}
                     <form onSubmit={handleAdd}>
                       <input 
                         type="number" 
                         onChange={event => setQuantity(event.target.value)} 
                         placeholder="Quantity..."
+                        min='1'
+                        value={quantity}
                       />
                       <button type="submit">Click Twice to Add Product to Cart</button>
                       <input value={product.id} className="hidden"/>
