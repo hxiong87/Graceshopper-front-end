@@ -14,8 +14,8 @@ const fetchAllProducts = async () => {
       }
 };
 
-const addProduct = async (userId, productId, quantity, token) => {
-  console.log("Add Product Vriables", userId, productId, quantity, token)
+const addProduct = async (obj, productId, token) => {
+  console.log("Add Product Vriables", productId, obj, token)
   try {
     const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/orders/${productId}/users`, {
           method: 'POST',
@@ -23,11 +23,7 @@ const addProduct = async (userId, productId, quantity, token) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({
-            userId,
-            productId,
-            quantity
-          })
+          body: JSON.stringify(obj)
         });
     const result = await response.json();
     console.log("LLLLLLLLLLLLLL", response)
@@ -90,7 +86,8 @@ export const Products = () => {
           console.log("Product Id", event.target[2].value)
           console.log("UUUUUUUUUUUUU", quantity, userId)
           setProductId(event.target[2].value)
-          const cart = await addProduct(userId, productId, quantity, token)
+          const obj = { userId: userId, productId: productId, quantity: quantity}
+          const cart = await addProduct( obj, productId, token )
           return cart
         }
     
