@@ -2,6 +2,26 @@ import React, { useState, useEffect } from "react";
 import { API_URL } from '../config';
 import { addProduct } from "./Products";
 
+const viewProduct = async (productId, token) => {
+      
+  try {
+    const response = await fetch(`${API_URL}/products/${productId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+    const result = await response.json();
+    if(result.error) {
+      throw result.error;
+    }
+    console.log('Attempting to view product', result, viewProduct)
+    return result;
+  } catch(error) {
+    console.error('Error fetching users cart', error);
+  } 
+}
+
 export const SingleProductView = async() => {
   const [ product, setProduct ] = useState([])
   const [quantity, setQuantity] = useState([])
@@ -11,7 +31,7 @@ export const SingleProductView = async() => {
   
   useEffect(() => {
       const fetchProducts = async () => {
-        const products = await viewProduct();
+        const products = await viewProduct(productId, token);
         console.log("This is a single product", products)
         setProduct(products);
 
@@ -29,25 +49,7 @@ export const SingleProductView = async() => {
     return cart
   }
 
-    const viewProduct = async (productId, token) => {
-      
-    try {
-      const response = await fetch(`${API_URL}/products/${productId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-    })
-      const result = await response.json();
-      if(result.error) {
-        throw result.error;
-      }
-      console.log('Attempting to view product', result, viewProduct)
-      return result;
-    } catch(error) {
-      console.error('Error fetching users cart', error);
-    } 
-  }
+   
     return (
       <div key={product.id} class="product" className="SPV-container">
                 <div>
