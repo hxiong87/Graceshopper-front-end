@@ -15,7 +15,7 @@ async function addNewProduct(postObj, userToken) {
   })
     .then(response => response.json())
     .then(result => {
-      console.log("BBBBBBBBBBBBBBB", postObj, result);
+      console.log("BBBBBBBBBBBBBBB", result);
       if (result.error === "Name already exists") {
         window.alert("A product with that name already exists")
       }
@@ -28,7 +28,7 @@ async function addNewProduct(postObj, userToken) {
 
 async function fetchAllUsers() {
   try {
-    const resp = await fetch(`https://graceshopper-0xzy.onrender.com/api/users`);
+    const resp = await fetch(`${API_URL}/users`);
     const result = await resp.json();
 
     if (result.error) {
@@ -41,23 +41,27 @@ async function fetchAllUsers() {
 }
 
 async function updateUser( userId, obj, token ) {
-  console.log ('userId', userId, obj, token);
-  
 
+
+console.log("YYYYYYYYYYYYYYY", userId, obj, token)
+console.log("ZZZZZZZZZZZZZZZZZZZZ", JSON.stringify(obj))
   try {
-      const response = await fetch(`https://graceshopper-0xzy.onrender.com/api/users/${userId}`, {
+
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
-          },
+          }, 
         body: JSON.stringify(obj)
       })
+      console.log("OOOOOOOOOOOOO", response)
       const result = await response.json();
       if (result.error) {
           throw result.error;
       }
-      console.log(result);
+
+      console.log("PPPPPPPPPPPPPP", result)
+
       return result;
     } catch (error) {
       console.error(error);
@@ -75,13 +79,13 @@ export const Admin = () => {
   const [userId, setUserId] = useState();
   const [isEngineer, setIsEngineer] = useState();
   const [isAdmin, setIsAdmin] = useState();
-  const [admin, setAdmin] = useState();
-  const [engineer, setEngineer] = useState();
+  const [url, setURL] = useState();
   const token = window.localStorage.getItem('token')
+  
   const handleSubmit = async event => {
       event.preventDefault();
       const obj = {
-          title, description, price, inventory, petType
+          title, description, price, inventory, petType, url: url
       }
       await addNewProduct(obj, token)
   }
@@ -114,15 +118,16 @@ export const Admin = () => {
     console.log("event target", event.target[3].value)
     setUserId(event.target[3].value);
     console.log('userId', userId);
-    const obj = { id: userId, isEngineer, isAdmin };
+    const obj = { id: userId, engineer: isEngineer, admin: isAdmin };
     console.log("updateUser", userId, obj, token)
     const updated = await updateUser(userId, obj, token);
-    return updated;
+    return updated
+
   }
 
   return (
     <div>
-      <form onSubmit={handleSubmit} class="login">
+      <form onSubmit={handleSubmit} class="login" className='add-product'>
         <label>
           <p>Name</p>
           <input 
@@ -163,6 +168,14 @@ export const Admin = () => {
             placeholder="Pet Type..."
           />
         </label>
+        <label>
+          <p>Image URL (Does not work yet)</p>
+          <input 
+            type="url" 
+            onChange={event => setURL(event.target.value)} 
+            placeholder="URL Link..."
+          />
+        </label>
         <div>
           <button 
             type="submit">
@@ -170,18 +183,21 @@ export const Admin = () => {
           </button>
         </div>
       </form>
+
       
       <div>
         { users.map((user) => (
           <div key={user.id} className='users'>
               <h4>
-                Email {user.email}
+                Email: {user.email}
               </h4>
               <div>
+
                 Engineer {user.engineer ? "Yes" : "No" } 
               </div>
               <div>
                 Admin {user.admin ? "Yes" : "No"}                  
+
               </div>
               <form onSubmit={handleUser}>
                 <div>

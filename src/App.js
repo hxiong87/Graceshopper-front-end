@@ -17,7 +17,7 @@ import {
 
 function App() {
   const [token, setToken] = useState("");
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState([]);
   const [isLoggedIn, setIsLoggedIn] =useState(false);
   // const [ isLoading, setIsLoading ] = useState(false);
   
@@ -48,7 +48,7 @@ function App() {
         <Header/> 
         <Navbar isLoggedIn={isLoggedIn} logout={logout}/>
         {/* {isLoading ? <Loading/> : null} */}
-       </div>
+      </div>
     <div className='main'>
       <main>
         <Routes>
@@ -58,7 +58,7 @@ function App() {
 
             <Route 
               path='/products' 
-              element={<Products />}/>
+              element={<Products user={user}/>}/>
            
             <Route
               path='/login'
