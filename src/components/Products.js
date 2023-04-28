@@ -95,15 +95,17 @@ export const Products = () => {
           return cart
         }
     
-   
-          
+   const handleClick  = async (event)  =>    
+   {
+    console.log (event)
+   }      
         return products.map((product) => (
             <div key={product.id} class="product" className="product-container">
                 <div>
                 <img src={product.url} alt={product.title} />
-                <Link to={`/products/${product.id}`}>{product.title}</Link>
+                <Link onClick={handleClick } to={`/products/${product.id}`}>{product.title}</Link>
                     <Routes>
-                      <Route path={`/products/${product.id}`} element={<SingleProductView/>}></Route>
+                      <Route path={`/products/${product.id}`} element={<SingleProductView productId={productId}/>}></Route>
                     </Routes>
                     <h4>Price: </h4>
                     <p>{product.price}</p>
