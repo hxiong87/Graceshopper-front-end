@@ -17,7 +17,7 @@ const fetchAllProducts = async () => {
 };
 
 
-const addProduct = async (obj, productId, token) => {
+export const addProduct = async (obj, productId, token) => {
   console.log("Add Product Vriables", productId, obj, token)
 
   try {
