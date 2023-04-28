@@ -42,6 +42,22 @@ async function updateProduct(productId, obj, token) {
   .catch(console.error);
 }
 
+async function deleteProduct (productId, token) {
+  console.log("deleteProduct", productId, token);
+  return fetch(`${API_URL}/products/${productId}`, {
+    method : 'DELETE',
+    headers :{
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log("result of delete", result);
+     return result
+  })
+  .catch(console.error);
+}
 
 async function fetchAllUsers() {
   try {
@@ -138,7 +154,13 @@ export const Admin = () => {
     const updatedProduct = await updateProduct(productId, obj, token);
     return updatedProduct;
   }
-
+ const handleDelete = async (event) => {
+  event.preventDefault();
+  console.log("handleDelete", event )
+  setProductId(event.target[0].value)
+  const deletedProduct= await deleteProduct (productId, token)
+  return deletedProduct
+ }
   return (
     <div>
       <form onSubmit={handleSubmit} class="login">
@@ -258,6 +280,20 @@ export const Admin = () => {
         <button 
             type="submit">
               Edit Product
+          </button>
+        </form>
+        <form onSubmit = {handleDelete}>
+          <label>
+            <p> Delet Product</p>
+            <input
+            type = "number"
+            onChange = {event => setProductId(event.target.value)}
+            placeholder ="Delete Product"
+            />
+          </label>
+          <button
+          type ="submit">
+            Delete Product
           </button>
         </form>
       </div>
