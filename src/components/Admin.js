@@ -131,8 +131,8 @@ export const Admin = () => {
 
   const handleUser = async (event) => {
     event.preventDefault();
-    console.log('event target', event.target[3].value);
-    setUserId(event.target[3].value);
+    console.log('event target', event.target[5].value);
+    setUserId(event.target[5].value);
     console.log('userId', userId);
     const obj = { id: userId, engineer: isEngineer, admin: isAdmin };
     console.log('updateUser', userId, obj, token);
@@ -306,17 +306,31 @@ export const Admin = () => {
             <form onSubmit={handleUser}>
               <div>
                 <label>
-                  <p>Engineer</p>
+                  <p>Add Engineer</p>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsEngineer(true)}
                   />
                 </label>
                 <label>
-                  <p>Admin</p>
+                  <p>Add Admin</p>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsAdmin(true)}
+                  />
+                </label>
+                <label>
+                  <p>Remove Engineer</p>
+                  <input
+                    type="checkbox"
+                    onChange={(event) => setIsEngineer(false)}
+                  />
+                </label>
+                <label>
+                  <p>Remove Admin</p>
+                  <input
+                    type="checkbox"
+                    onChange={(event) => setIsAdmin(false)}
                   />
                 </label>
               </div>
