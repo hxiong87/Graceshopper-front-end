@@ -108,14 +108,6 @@ export const Admin = () => {
   const [isAdmin, setIsAdmin] = useState();
   const [url, setURL] = useState();
   const [productId, setProductId] = useState();
-  const token = window.localStorage.getItem('token')
-  const handleSubmit = async event => {
-      event.preventDefault();
-      const obj = {
-          title, description, price, inventory, petType, url: url
-      }
-      await addNewProduct(obj, token)
-  }
   const token = window.localStorage.getItem('token');
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -292,7 +284,7 @@ export const Admin = () => {
         </form>
         <form onSubmit = {handleDelete}>
           <label>
-            <p> Delet Product</p>
+            <p> Delete Product</p>
             <input
             type = "number"
             onChange = {event => setProductId(event.target.value)}

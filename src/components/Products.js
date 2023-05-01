@@ -97,13 +97,17 @@ export const Products = () => {
     
    const handleClick  = async (event)  =>    
    {
-    console.log (event)
+    console.log ("Event", event.target.children[0].value)
+    window.localStorage.setItem('Product Id', event.target.children[0].value)
+    setProductId(event.target.children[0].value)
    }      
         return products.map((product) => (
             <div key={product.id} class="product" className="product-container">
                 <div>
                 <img src={product.url} alt={product.title} />
-                <Link onClick={handleClick } to={`/products/${product.id}`}>{product.title}</Link>
+                <Link onClick={handleClick} to={`/products/${product.id}`}>{product.title}
+                <input value={product.id}></input>
+                </Link>
                     <Routes>
                       <Route path={`/products/${product.id}`} element={<SingleProductView productId={productId}/>}></Route>
                     </Routes>
