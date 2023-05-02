@@ -149,7 +149,7 @@ export const Admin = () => {
           </select>
         </label>
         <label>
-          <p>Image URL (Does not work yet)</p>
+          <p>Image URL </p>
           <input
             type="url"
             onChange={(event) => setURL(event.target.value)}
@@ -161,7 +161,7 @@ export const Admin = () => {
         </div>
       </form>
 
-      <div>
+      <div className="admin-c">
         {users.map((user) => (
           <div key={user.id} className="users">
             <h4>Email: {user.email}</h4>
