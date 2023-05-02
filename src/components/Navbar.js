@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-
+import { API_URL } from '../config';
 
 export const Navbar = ({ isLoggedIn, logout }) => {
-  
-
-
-  
   
     return (
         <nav className="nav-main">
