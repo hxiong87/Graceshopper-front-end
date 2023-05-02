@@ -55,7 +55,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 5vh;
+  height: 8vh;
 }
 .navigation-links {
   list-style: none;
@@ -81,6 +81,14 @@
 
 .rightside-links {
 display: end;
+}
+
+.nav-img {
+  width: 100px;
+  height: 12vh;
+  position: relative;
+  left: 50%;
+
 }
 
 footer {
