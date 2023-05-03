@@ -142,6 +142,5 @@ export const Profile = ({token}) => {
         </button>
       </form>
       </div>
-
     )
     }
