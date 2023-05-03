@@ -207,7 +207,7 @@ export const Admin = () => {
           </select>
         </label>
         <label>
-          <p>Image URL (Does not work yet)</p>
+          <p>Image URL </p>
           <input
             type="url"
             onChange={(event) => setURL(event.target.value)}
@@ -218,6 +218,9 @@ export const Admin = () => {
           <button type="submit">Create New Product</button>
         </div>
       </form>
+
+
+      {/* <div className="admin-c">
 
       <div>
         <form onSubmit={handleEdit}>
@@ -297,7 +300,8 @@ export const Admin = () => {
           </button>
         </form>
       </div>
-      <div>
+      <div> */}
+
         {users.map((user) => (
           <div key={user.id} className="users">
             <h4>Email: {user.email}</h4>
@@ -340,7 +344,7 @@ export const Admin = () => {
           </div>
         ))}
       </div>
-    </div>
+  // </div>
   );
 };
 

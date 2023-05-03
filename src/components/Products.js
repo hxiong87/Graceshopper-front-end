@@ -78,6 +78,7 @@ export const Products = () => {
       console.log('These are the products', prod);
       setProducts(prod);
     };
+
     fetchProducts();
   }, []);
 
@@ -102,8 +103,8 @@ export const Products = () => {
       ? products
       : products.filter((product) => product.petType === petType);
   return (
-    <div>
-      <div>
+    <div className="product-page-container">
+      <div ClassName='SearchBar'>
         Pet Type:
         <select value={petType} onChange={handlePetTypeChange}>
           <option value="All">All</option>
@@ -111,6 +112,8 @@ export const Products = () => {
           <option value="Cat">Cat</option>
         </select>
       </div>
+      <br></br>
+      
       <div className="product-grid-container">
         {filteredProducts.map((product) => (
           <div key={product.id} className="product-container">
@@ -154,4 +157,3 @@ export const Products = () => {
     </div>
   );
 };
-
