@@ -23,6 +23,41 @@ async function addNewProduct(postObj, userToken) {
     .catch(console.error);
 }
 
+async function updateProduct(productId, obj, token) {
+  console.log("updateProduct", productId, obj, token);
+  return fetch(`${API_URL}/products/${productId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(obj)
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log("TTTTTTT", result);
+     return result
+  })
+  .catch(console.error);
+}
+
+async function deleteProduct (productId, token) {
+  console.log("deleteProduct", productId, token);
+  return fetch(`${API_URL}/products/${productId}`, {
+    method : 'DELETE',
+    headers :{
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log("result of delete", result);
+     return result
+  })
+  .catch(console.error);
+}
+
 async function fetchAllUsers() {
   try {
     const resp = await fetch(`${API_URL}/users`);
@@ -72,6 +107,7 @@ export const Admin = () => {
   const [isEngineer, setIsEngineer] = useState();
   const [isAdmin, setIsAdmin] = useState();
   const [url, setURL] = useState();
+  const [productId, setProductId] = useState();
   const token = window.localStorage.getItem('token');
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -85,7 +121,6 @@ export const Admin = () => {
     };
     await addNewProduct(obj, token);
   };
-
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetchAllUsers();
@@ -96,8 +131,8 @@ export const Admin = () => {
 
   const handleUser = async (event) => {
     event.preventDefault();
-    console.log('event target', event.target[3].value);
-    setUserId(event.target[3].value);
+    console.log('event target', event.target[5].value);
+    setUserId(event.target[5].value);
     console.log('userId', userId);
     const obj = { id: userId, engineer: isEngineer, admin: isAdmin };
     console.log('updateUser', userId, obj, token);
@@ -105,6 +140,29 @@ export const Admin = () => {
     return updated;
   };
 
+  const handleEdit = async (event) => {
+    event.preventDefault();
+    console.log("events", event.target[0].value);
+    setProductId(event.target[0].value);
+    const obj = {
+      id: productId,
+      title,
+      description, 
+      price,
+      inventory,
+      petType,
+      url
+    }
+    const updatedProduct = await updateProduct(productId, obj, token);
+    return updatedProduct;
+  }
+ const handleDelete = async (event) => {
+  event.preventDefault();
+  console.log("handleDelete", event )
+  setProductId(event.target[0].value)
+  const deletedProduct= await deleteProduct (productId, token)
+  return deletedProduct
+ }
   return (
     <div>
       <form onSubmit={handleSubmit} class="login" className="add-product">
@@ -161,7 +219,89 @@ export const Admin = () => {
         </div>
       </form>
 
-      <div className="admin-c">
+
+      {/* <div className="admin-c">
+
+      <div>
+        <form onSubmit={handleEdit}>
+          <label>
+            <p>Product Id</p>
+            <input
+            type='text'
+            onChange={event => setProductId(event.target.value)}
+            placeholder='Enter Product Id'
+            />
+          </label>
+          <label>
+          <p>Name</p>
+          <input 
+            type="text" 
+            onChange={event => setTitle(event.target.value)} 
+            placeholder="Name..."
+          />
+        </label>
+        <label>
+          <p>Description</p>
+          <input 
+            type="text" 
+            onChange={event => setDescription(event.target.value)} 
+            placeholder="Description..."
+          />
+        </label>
+        <label>
+          <p>Price</p>
+          <input 
+            type="number" 
+            onChange={event => setPrice(event.target.value)} 
+            placeholder="Price..."
+          />
+        </label>
+        <label>
+          <p>Inventory</p>
+          <input 
+            type="number" 
+            onChange={event => setInventory(event.target.value)} 
+            placeholder="Inventory..."
+          />
+        </label>
+        <label>
+          <p>Pet Type</p>
+          <input 
+            type="text" 
+            onChange={event => setPetType(event.target.value)} 
+            placeholder="Pet Type..."
+          />
+        </label>
+        <label>
+          <p>Image URL (Does not work yet)</p>
+          <input 
+            type="text" 
+            onChange={event => setURL(event.target.value)} 
+            placeholder="URL Link..."
+          />
+        </label>
+        <button 
+            type="submit">
+              Edit Product
+          </button>
+        </form>
+        <form onSubmit = {handleDelete}>
+          <label>
+            <p> Delete Product</p>
+            <input
+            type = "number"
+            onChange = {event => setProductId(event.target.value)}
+            placeholder ="Delete Product"
+            />
+          </label>
+          <button
+          type ="submit">
+            Delete Product
+          </button>
+        </form>
+      </div>
+      <div> */}
+
         {users.map((user) => (
           <div key={user.id} className="users">
             <h4>Email: {user.email}</h4>
@@ -170,17 +310,31 @@ export const Admin = () => {
             <form onSubmit={handleUser}>
               <div>
                 <label>
-                  <p>Engineer</p>
+                  <p>Add Engineer</p>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsEngineer(true)}
                   />
                 </label>
                 <label>
-                  <p>Admin</p>
+                  <p>Add Admin</p>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsAdmin(true)}
+                  />
+                </label>
+                <label>
+                  <p>Remove Engineer</p>
+                  <input
+                    type="checkbox"
+                    onChange={(event) => setIsEngineer(false)}
+                  />
+                </label>
+                <label>
+                  <p>Remove Admin</p>
+                  <input
+                    type="checkbox"
+                    onChange={(event) => setIsAdmin(false)}
                   />
                 </label>
               </div>
@@ -190,7 +344,7 @@ export const Admin = () => {
           </div>
         ))}
       </div>
-    </div>
+  // </div>
   );
 };
 
