@@ -131,8 +131,8 @@ export const Admin = () => {
 
   const handleUser = async (event) => {
     event.preventDefault();
-    console.log('event target', event.target[3].value);
-    setUserId(event.target[3].value);
+    console.log('event target', event.target[5].value);
+    setUserId(event.target[5].value);
     console.log('userId', userId);
     const obj = { id: userId, engineer: isEngineer, admin: isAdmin };
     console.log('updateUser', userId, obj, token);
@@ -200,14 +200,14 @@ export const Admin = () => {
         </label>
         <label>
           <p>Pet Type</p>
-          <input
-            type="text"
-            onChange={(event) => setPetType(event.target.value)}
-            placeholder="Pet Type..."
-          />
+          <select onChange={(event) => setPetType(event.target.value)}>
+            <option value="">Select Pet Type...</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+          </select>
         </label>
         <label>
-          <p>Image URL (Does not work yet)</p>
+          <p>Image URL </p>
           <input
             type="url"
             onChange={(event) => setURL(event.target.value)}
@@ -218,6 +218,9 @@ export const Admin = () => {
           <button type="submit">Create New Product</button>
         </div>
       </form>
+
+
+      {/* <div className="admin-c">
 
       <div>
         <form onSubmit={handleEdit}>
@@ -284,7 +287,7 @@ export const Admin = () => {
         </form>
         <form onSubmit = {handleDelete}>
           <label>
-            <p> Delet Product</p>
+            <p> Delete Product</p>
             <input
             type = "number"
             onChange = {event => setProductId(event.target.value)}
@@ -297,7 +300,8 @@ export const Admin = () => {
           </button>
         </form>
       </div>
-      <div>
+      <div> */}
+
         {users.map((user) => (
           <div key={user.id} className="users">
             <h4>Email: {user.email}</h4>
@@ -306,17 +310,31 @@ export const Admin = () => {
             <form onSubmit={handleUser}>
               <div>
                 <label>
-                  <p>Engineer</p>
+                  <p>Add Engineer</p>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsEngineer(true)}
                   />
                 </label>
                 <label>
-                  <p>Admin</p>
+                  <p>Add Admin</p>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsAdmin(true)}
+                  />
+                </label>
+                <label>
+                  <p>Remove Engineer</p>
+                  <input
+                    type="checkbox"
+                    onChange={(event) => setIsEngineer(false)}
+                  />
+                </label>
+                <label>
+                  <p>Remove Admin</p>
+                  <input
+                    type="checkbox"
+                    onChange={(event) => setIsAdmin(false)}
                   />
                 </label>
               </div>
@@ -326,7 +344,7 @@ export const Admin = () => {
           </div>
         ))}
       </div>
-    </div>
+  // </div>
   );
 };
 

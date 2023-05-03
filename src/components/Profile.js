@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from '../config';
+
 const editInfo = async(token,user) => {
   try {
     const response=await fetch (`${API_URL}/users/me`, {
@@ -43,6 +44,31 @@ export const Profile = ({token}) => {
   const [expDate, setExpDate] = useState('');
   const [secCode, setSecCode] = useState('');
   const [profile, setProfile] = useState('');
+
+import { useState, useEffect } from 'react';
+
+async function fetchMe(userId, token) {
+  console.log('YYYYYYYYYYYYYYY', userId, token);
+  try {
+    const response = await fetch(`${API_URL}/users/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    console.log('OOOOOOOOOOOOO', response);
+    const result = await response.json();
+    if (result.error) {
+      throw result.error;
+    }
+    console.log('PPPPPPPPPPPPPP', result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
 
   useEffect(() => {
     async function getProfile () {
