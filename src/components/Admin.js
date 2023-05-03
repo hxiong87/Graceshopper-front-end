@@ -108,7 +108,6 @@ export const Admin = () => {
   const [isAdmin, setIsAdmin] = useState();
   const [url, setURL] = useState();
   const [productId, setProductId] = useState();
-
   const token = window.localStorage.getItem('token');
   const handleSubmit = async (event) => {
     event.preventDefault();
