@@ -200,11 +200,11 @@ export const Admin = () => {
         </label>
         <label>
           <p>Pet Type</p>
-          <input
-            type="text"
-            onChange={(event) => setPetType(event.target.value)}
-            placeholder="Pet Type..."
-          />
+          <select onChange={(event) => setPetType(event.target.value)}>
+            <option value="">Select Pet Type...</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+          </select>
         </label>
         <label>
           <p>Image URL (Does not work yet)</p>

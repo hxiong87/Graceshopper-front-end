@@ -15,8 +15,8 @@ export const Navbar = ({ isLoggedIn, logout }) => {
                     {isLoggedIn && <Link className="admin-tab" to='/admin'>Admin</Link>}
                 </ul>  
                 </div>
-                <div className="logo">
-                    <h1>S F P </h1>
+                <div className="nav-logo">
+                <img className="nav-img" src='./sfp.png' alt="home backgroud img" />
                 </div>
                
                 <div className="navigation-links2">
@@ -24,7 +24,7 @@ export const Navbar = ({ isLoggedIn, logout }) => {
                      <Link className='login' to='/login'>Login</Link>
                     <Link className='register' to='/register'>Register</Link>
                     <Link className="cart" to='/Cart'>Shopping Cart</Link>
-                    <Link to='/' onClick={() => logout()}>Logout</Link>
+                   {isLoggedIn && <Link to='/' onClick={() => logout()}>Logout</Link>}
                 </ul>
                
               
