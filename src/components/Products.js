@@ -78,7 +78,6 @@ export const Products = () => {
       console.log('These are the products', prod);
       setProducts(prod);
     };
-
     fetchProducts();
   }, []);
 
@@ -155,3 +154,4 @@ export const Products = () => {
     </div>
   );
 };
+

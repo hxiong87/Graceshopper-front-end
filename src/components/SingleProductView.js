@@ -21,12 +21,12 @@ const viewProduct = async (productId, token) => {
   }
 };
 
-export const SingleProductView = ({ productId }) => {
+export const SingleProductView = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState([]);
   const token = window.localStorage.getItem('token');
-  const userId = window.localStorage.getItem('userId');
-console.log("hello", productId)
+  const productId = window.localStorage.getItem('Product Id');
+  console.log("Product ID in single view", productId)
   useEffect(() => {
     const fetchProducts = async () => {
       const products = await viewProduct(productId, token);
