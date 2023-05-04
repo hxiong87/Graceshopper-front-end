@@ -165,6 +165,7 @@ export const Admin = () => {
  }
   return (
     <div>
+
       <form onSubmit={handleSubmit} class="login" className="add-product">
         <label>Name</label>
           <input
@@ -214,7 +215,7 @@ export const Admin = () => {
       </form>
 
 
-      {/* <div className="admin-c">
+     <div className="admin-c">
 
       <div>
         <form onSubmit={handleEdit}>
@@ -267,7 +268,7 @@ export const Admin = () => {
           />
         </label>
         <label>
-          <p>Image URL (Does not work yet)</p>
+          <p>Image URL</p>
           <input 
             type="text" 
             onChange={event => setURL(event.target.value)} 
@@ -294,7 +295,7 @@ export const Admin = () => {
           </button>
         </form>
       </div>
-      <div> */}
+      <div>
 
         {users.map((user) => (
           <div key={user.id} className="users">
@@ -338,23 +339,7 @@ export const Admin = () => {
           </div>
         ))}
       </div>
-  // </div>
+  </div>
+  </div>
   );
 };
-
-// export const Admin = () => {
-// //   add products, edit and delete products, view user information,
-// //  allow checkout options
-// //  get all users
-
-//     return (
-//     <div className="admin-bar">
-//       <Link className='add-product'>Add Product</Link>
-//       <Link className='edit-product'>Edit Product</Link>
-//       <Link className='delete-product'>Delete Product</Link>
-//       <Link className='view-user'>View User</Link>
-//       <Link className='get-all-users'>Get All Users</Link>
-//       <h5>Admin</h5>
-//     </div>
-//   );
-// };

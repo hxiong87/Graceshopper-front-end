@@ -33,6 +33,7 @@ export const SingleProductView = () => {
       const products = await viewProduct(productId, token);
       console.log('This is a single product', products);
       setProduct(products);
+      //comment
     };
     fetchProducts();
   }, []);
