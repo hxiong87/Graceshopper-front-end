@@ -6,20 +6,20 @@ const editInfo = async(token,user) => {
     const response=await fetch (`${API_URL}/users/me`, {
       method: "PATCH", 
       headers: {
-        "Content-Type": "application-json", 
+        "Content-Type": "application/json", 
         "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
         user: {
           address: user.address, 
           aptNum: user.aptNum,
-          city:user.city,
-          state:user.state,
-          zip:user.zip,
-          card:user.card,
-          cardName:user.cardName,
-          expDate:user.expdate,
-          secCode:user.secCode
+          city: user.city,
+          state: user.state,
+          zip: user.zip,
+          card: user.card,
+          cardName: user.cardName,
+          expDate: user.expdate,
+          secCode: user.secCode
         }
 
       })
@@ -32,20 +32,6 @@ const editInfo = async(token,user) => {
     console.error(error)
   }
 }
-
-export const Profile = ({token}) => {
-  const [address, setAddress] = useState('');
-  const [aptNum, setAptNum] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState]= useState('');
-  const [zip, setZip] = useState();
-  const [card,setCard] = useState('');
-  const [cardName, setCardName] = useState('');
-  const [expDate, setExpDate] = useState('');
-  const [secCode, setSecCode] = useState('');
-  const [profile, setProfile] = useState('');
-
-import { useState, useEffect } from 'react';
 
 async function fetchMe(userId, token) {
   console.log('YYYYYYYYYYYYYYY', userId, token);
@@ -70,22 +56,37 @@ async function fetchMe(userId, token) {
 
 
 
-  useEffect(() => {
-    async function getProfile () {
-      try{
-        const response= await fetch (`${API_URL}/users/me`)
-        let result=await response.json();
-        setProfile(result.data.user)
-      } catch(error) {
-        console.error(error)
-      }
-    }
-    getProfile()
-  },[])
+// async function getProfile () {
+//   try{
+//     const response= await fetch (`${API_URL}/users/me`, {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         "Authorization": `Bearer ${token}`
+//       }
+//     })
+//     let result=await response.json();
+//     console.log('The use effect in profile', result.data.user)
+//   } catch(error) {
+//     console.error(error)
+//   }
+// }
+
+export const Profile = ({token}) => {
+  const [address, setAddress] = useState('');
+  const [aptNum, setAptNum] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState]= useState('');
+  const [zip, setZip] = useState();
+  const [card,setCard] = useState('');
+  const [cardName, setCardName] = useState('');
+  const [expDate, setExpDate] = useState('');
+  const [secCode, setSecCode] = useState('');
+  const [profile, setProfile] = useState('');
+  
 
   const handleSubmit= async (event) => {
     event.preventDefault();
-    const personalInfo = {
+      const personalInfo = {
       address,
       aptNum,
       city,
@@ -96,76 +97,96 @@ async function fetchMe(userId, token) {
       expDate,
       secCode
     }
-    await editInfo (token,personalInfo) 
-    try {
-      const response = await fetch (`${API_URL}/users/me`)
-      let result = await response.json();
-      setProfile (result.data.user)
-    }
-    catch (error) {
-      console.error(error);
-    }
+   }
+    // useEffect(() => {
+    //   setProfile(personalInfo)
+    //   // getProfile()
+    // },[])
 
-  }
+    // await editInfo (token,personalInfo) 
+    // try {
+    //   const response = await fetch (`${API_URL}/users/me`)
+    //   let result = await response.json();
+    //   setProfile (personalInfo)
+    // }
+    // catch (error) {
+    //   console.error(error);
+    // }
+
+ 
 
     return (
-      <div id="personal-info">
-      <form id="address" onSubmit={handleSubmit}>
+      <div className="personal-info">
+      <form className="address" onSubmit={handleSubmit}>
         <h3> Edit Address:</h3>
-        <label>
-          Street Address
-        </label>
-        <input type='text' autoComplete="address-line1" placeholder="Enter Street Address" onChange={(event) => {setAddress(event.target.value)}}/>
-       
-        <br/>
-        <label>
-          Apt Number (Optional)
-        </label>
-        <input type='text' autoComplete="address-line2" placeholder="Enter Apt Number(optional)" onChange={(event) => {setAptNum(event.target.value)}}/>
-        <br/>
-        <label>
-          City
-        </label>
-        <input type='text' autoComplete="address-level2" placeholder="Enter your city" onChange={(event) => {setCity(event.target.value)}}/>
-        <br/>
-        <label>
-          State
-          </label>
-          <input type='text' autoComplete="address-level1" placeholder="Enter your state" onChange={(event) => {setState(event.target.value)}}/>
-        <br/>
-        <label>
-          Zip/Postal code
-        </label>
-        <input type='number' minLength={7} required autoComplete="postal-code" placeholder="Enter your zip code" onChange={(event) => {setZip(event.target.value)}}/>
-        <br/>
-        <button typeof="submit"> Save address
-        </button>
+        <label>Street Address</label>
+          <input 
+            type='text' 
+            autoComplete="address-line1" 
+            placeholder="Enter Street Address" 
+            onChange={(event) => {setAddress(event.target.value)}}
+          />     
+        <label>Apt Number (Optional)</label>
+          <input 
+            type='text' 
+            autoComplete="address-line2" 
+            placeholder="Enter Apt Number(optional)" 
+            onChange={(event) => {setAptNum(event.target.value)}}
+          />
+        <label>City</label>
+          <input 
+            type='text' 
+            autoComplete="address-level2" 
+            placeholder="Enter your city" 
+            onChange={(event) => {setCity(event.target.value)}}
+          />
+        <label>State</label>
+          <input 
+            type='text' 
+            autoComplete="address-level1" 
+            placeholder="Enter your state" 
+            onChange={(event) => {setState(event.target.value)}}
+          />
+        <label>Zip/Postal code</label>
+          <input 
+            type='number' 
+            minLength={7} required 
+            autoComplete="postal-code" 
+            placeholder="Enter your zip code" 
+            onChange={(event) => {setZip(event.target.value)}}
+          />
+        <button type="submit"> Save address</button>
       </form>
       
-      <form id="credit-card" onSubmit={handleSubmit}>
+      <form className="credit-card" onSubmit={handleSubmit}>
         <h3> Edit credit card:</h3>
-        <label>
-          Credit Card
-        </label>
-        <input type='number' maxLength={16} required placeholder="Enter your credit card number" onChange={(event) => {setCard(event.target.value)}}/>
-        <br/>
-        <label>
-          Cardholder Name
-        </label>
-        <input type='text' placeholder="Enter cardholder name" onChange={(event) => {setCardName(event.target.value)}}/>
-        <br/>
-        <label>
-          Expiration Date
-        </label>
-        <input type="month" placeholder="Enter expiration date" onChange={(event) => {setExpDate(event.target.value)}}/>
-        <br/>
-        <label>
-          Security code
-        </label>
-        <input type='number' maxLength={4} required placeholder="Enter CVC" onChange={(event) => {setSecCode(event.target.value)}}/> 
-        <br/>
-        <button typeof="submit"> Save card info
-        </button>
+        <label>Credit Card</label>
+          <input 
+            type='number' 
+            maxLength={16} required 
+            placeholder="Enter your credit card number" 
+            onChange={(event) => {setCard(event.target.value)}}
+          />
+        <label>Cardholder Name</label>
+          <input 
+            type='text' 
+            placeholder="Enter cardholder name" 
+            onChange={(event) => {setCardName(event.target.value)}}
+          />
+        <label>Expiration Date</label>
+          <input 
+            type="month" 
+            placeholder="Enter expiration date" 
+            onChange={(event) => {setExpDate(event.target.value)}}
+          />
+        <label>Security code</label>
+          <input 
+            type='number' 
+            maxLength={4} required 
+            placeholder="Enter CVC" 
+            onChange={(event) => {setSecCode(event.target.value)}}
+          /> 
+        <button type="submit"> Save card info</button>
       </form>
       </div>
     )

@@ -166,54 +166,48 @@ export const Admin = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} class="login" className="add-product">
-        <label>
-          <p>Name</p>
+        <label>Name</label>
           <input
             type="text"
             onChange={(event) => setTitle(event.target.value)}
             placeholder="Name..."
           />
-        </label>
-        <label>
-          <p>Description</p>
+        
+        <label>Description</label>
           <input
             type="text"
             onChange={(event) => setDescription(event.target.value)}
             placeholder="Description..."
           />
-        </label>
-        <label>
-          <p>Price</p>
+        
+        <label>Price</label>
           <input
             type="number"
             onChange={(event) => setPrice(event.target.value)}
             placeholder="Price..."
           />
-        </label>
-        <label>
-          <p>Inventory</p>
+       
+        <label>Inventory</label>
           <input
             type="number"
             onChange={(event) => setInventory(event.target.value)}
             placeholder="Inventory..."
           />
-        </label>
-        <label>
-          <p>Pet Type</p>
+        
+        <label>Pet Type</label>
           <select onChange={(event) => setPetType(event.target.value)}>
             <option value="">Select Pet Type...</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
           </select>
-        </label>
-        <label>
-          <p>Image URL </p>
+        <br/>
+        <label>Image URL</label>
           <input
             type="url"
             onChange={(event) => setURL(event.target.value)}
             placeholder="URL Link..."
           />
-        </label>
+        
         <div>
           <button type="submit">Create New Product</button>
         </div>
