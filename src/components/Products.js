@@ -40,28 +40,6 @@ export const addProduct = async (obj, productId, token) => {
   }
 };
 
-// const addProduct = async (userId, productId, quantity, token) => {
-//   console.log("Add Product Vriables", userId, productId, quantity, token)
-//   return fetch(`https://graceshopper-0xzy.onrender.com/api/products/${productId}`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Authorization': `Bearer ${token}`
-//     },
-//     body: JSON.stringify({
-//       userId,
-//       productId,
-//       quantity
-//     })
-//   })
-//     .then(response => {console.log("LLLLLLLLLLLLLL", response); response.json()})
-//     .then(result => {
-//       console.log("BBBBBBBBBBBBBBB", result);
-//       return result;
-//     })
-//     .catch(console.error);
-// };
-
 export const Products = () => {
   const [products, setProducts] = useState([]);
   const [quantity, setQuantity] = useState([]);
@@ -97,21 +75,24 @@ export const Products = () => {
 
   const handleClick = async (event) => {
     console.log('This is new', event);
+    // window.localStorage.setItem('setting productId', productId)
   };
   const filteredProducts =
     petType === 'All'
       ? products
       : products.filter((product) => product.petType === petType);
   return (
-    <div className="product-page-container">
-      <div ClassName='SearchBar'>
-        Pet Type:
-        <select value={petType} onChange={handlePetTypeChange}>
+    <div>
+          <div className='SearchBar'>
+        <label className='search-label'>Pet Type:</label>
+        <select className='search-dropdown' value={petType} onChange={handlePetTypeChange}>
           <option value="All">All</option>
           <option value="Dog">Dog</option>
           <option value="Cat">Cat</option>
         </select>
       </div>
+    <div className="product-page-container">
+
       <br></br>
       
       <div className="product-grid-container">
@@ -154,6 +135,7 @@ export const Products = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

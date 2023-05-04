@@ -27,6 +27,7 @@ export const SingleProductView = () => {
   const token = window.localStorage.getItem('token');
   const productId = window.localStorage.getItem('Product Id');
   console.log("Product ID in single view", productId)
+  
   useEffect(() => {
     const fetchProducts = async () => {
       const products = await viewProduct(productId, token);

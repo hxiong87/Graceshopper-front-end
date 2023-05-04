@@ -29,7 +29,7 @@ export const Navbar = ({ isLoggedIn, logout }) => {
           <img className="nav-img" src="./sfp.png" alt="home backgroud img" />
         </div>
 
-        <nav className="nav-main">
+        {/* <nav className="nav-main">
        
             <div className='navigation-links'>
                 <ul className="leftside-link">
@@ -55,7 +55,7 @@ export const Navbar = ({ isLoggedIn, logout }) => {
                
             </div>
    
-         </nav>
+         </nav> */}
 
         <div className="navigation-links2">
           <ul className="rightside-links">
