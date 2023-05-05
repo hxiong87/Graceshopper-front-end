@@ -26,7 +26,7 @@ async function loginUser(credentials) {
 
 
 
-export const Login = ({ user, setUser, isAdmin, setIsAdmin }) => {
+export const Login = ({ user, setUser }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleSubmit = async (event) => {

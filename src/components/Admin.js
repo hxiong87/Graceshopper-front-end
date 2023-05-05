@@ -80,7 +80,7 @@ async function updateUser(userId, obj, token) {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(obj),
     });
@@ -96,7 +96,24 @@ async function updateUser(userId, obj, token) {
   }
 }
 
-export const Admin = () => {
+async function getUser(userId, token) {
+  console.log('login userId and token', userId, token);
+  return fetch(`${API_URL}/users/${userId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`,
+    }
+  })
+
+  .then(response => response.json())
+      .then(result => {
+        console.log('result', result);
+        return result
+      })
+      .catch(console.error);
+}
+
+export const Admin = ({adminPrivileges, setAdminPrivileges}) => {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
@@ -109,6 +126,7 @@ export const Admin = () => {
   const [url, setURL] = useState();
   const [productId, setProductId] = useState();
   const token = window.localStorage.getItem('token');
+  const Id = window.localStorage.getItem('userId')
   const handleSubmit = async (event) => {
     event.preventDefault();
     const obj = {
@@ -122,12 +140,17 @@ export const Admin = () => {
     await addNewProduct(obj, token);
   };
   useEffect(() => {
+
     const fetchData = async () => {
+      const userAdmin = await getUser(Id, token);
       const result = await fetchAllUsers();
       setUsers(result);
+      setAdminPrivileges(userAdmin[0].admin);
+      console.log ('userAdmin', userAdmin[0].admin);
+      
     };
     fetchData();
-  });
+  },[]);
 
   const handleUser = async (event) => {
     event.preventDefault();
@@ -163,7 +186,7 @@ export const Admin = () => {
   const deletedProduct= await deleteProduct (productId, token)
   return deletedProduct
  }
- if (isAdmin) {
+ if (adminPrivileges) {
 
 
   return (
@@ -347,6 +370,8 @@ export const Admin = () => {
   </div>
   
         );
+ } else {
+  return <h3> You are not an Admin</h3>
  }
 
 };
