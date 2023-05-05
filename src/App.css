@@ -227,7 +227,7 @@ button[type='submit']:hover {
 }
 
 .admin-container {
- padding-left: 50%;
+ padding-left: 30%;
   align-items: center;
   justify-content: center;
 }
@@ -340,13 +340,10 @@ button[type='submit']:hover {
   display: none;
 }
 
-.main {
-  display: flex;
-  align-content: center;
-}
+
 
 .personal-info {
-  padding-left: 40vw;
+  padding-left: 10vw;
   align-items: center;
   justify-content: center;
 
