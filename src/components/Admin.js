@@ -163,7 +163,11 @@ export const Admin = () => {
   const deletedProduct= await deleteProduct (productId, token)
   return deletedProduct
  }
+ if (isAdmin) {
+
+
   return (
+    
     <div>
 
       <form onSubmit={handleSubmit} class="login" className="add-product">
@@ -341,5 +345,8 @@ export const Admin = () => {
       </div>
   </div>
   </div>
-  );
+  
+        );
+ }
+
 };

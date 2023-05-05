@@ -19,6 +19,7 @@ function App() {
   const [token, setToken] = useState('');
   const [user, setUser] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [ isAdmin, setIsAdmin ] = useState();
   // const [ isLoading, setIsLoading ] = useState(false);
 
   function logout() {
@@ -41,7 +42,7 @@ function App() {
     <div className="app-container">
       <div>
         <Header />
-        <Navbar isLoggedIn={isLoggedIn} logout={logout} />
+        <Navbar isLoggedIn={isLoggedIn} logout={logout} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
         {/* {isLoading ? <Loading/> : null} */}
       </div>
       <div className="main">
@@ -53,7 +54,7 @@ function App() {
 
             <Route
               path="/login"
-              element={<Login user={user} setUser={setUser} />}
+              element={<Login user={user} setUser={setUser} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>}
             />
 
             <Route

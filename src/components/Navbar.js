@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { API_URL } from '../config';
 
-export const Navbar = ({ isLoggedIn, logout }) => {
+export const Navbar = ({ isLoggedIn, logout, isAdmin }) => {
   
+
     return (
 
       <nav className="nav-main">
@@ -18,11 +19,11 @@ export const Navbar = ({ isLoggedIn, logout }) => {
             <Link className="profile" to="/profile">
               Profile
             </Link>
-            {isLoggedIn && (
+            (
               <Link className="admin-tab" to="/admin">
                 Admin
               </Link>
-            )}
+            )
           </ul>
         </div>
         <div className="nav-logo">

@@ -24,7 +24,9 @@ async function loginUser(credentials) {
       .catch(console.error);
   }
 
-export const Login = ({ user, setUser }) => {
+
+
+export const Login = ({ user, setUser, isAdmin, setIsAdmin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleSubmit = async (event) => {
@@ -40,6 +42,8 @@ export const Login = ({ user, setUser }) => {
         window.localStorage.setItem('token', userObj.token)
         window.localStorage.setItem('userEmail', userObj.user.email)
         window.localStorage.setItem('userId', userObj.user.id)
+        const userId = localStorage.getItem("userId");
+        const token = localStorage.getItem("token");
       setUser([userObj.user.email, userObj.user.id]);
       // window.location.assign("/profile")
     }
