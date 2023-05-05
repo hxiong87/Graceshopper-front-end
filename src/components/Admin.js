@@ -191,45 +191,45 @@ export const Admin = ({adminPrivileges, setAdminPrivileges}) => {
 
   return (
     
-    <div>
+    <div className='admin-container'>
 
       <form onSubmit={handleSubmit} class="login" className="add-product">
-        <label>Name</label>
+        <label>Name:</label>
           <input
             type="text"
             onChange={(event) => setTitle(event.target.value)}
             placeholder="Name..."
           />
         
-        <label>Description</label>
+        <label>Description:</label>
           <input
             type="text"
             onChange={(event) => setDescription(event.target.value)}
             placeholder="Description..."
           />
         
-        <label>Price</label>
+        <label>Price:</label>
           <input
             type="number"
             onChange={(event) => setPrice(event.target.value)}
             placeholder="Price..."
           />
        
-        <label>Inventory</label>
+        <label>Inventory:</label>
           <input
             type="number"
             onChange={(event) => setInventory(event.target.value)}
             placeholder="Inventory..."
           />
         
-        <label>Pet Type</label>
+        <label>Pet Type:</label>
           <select onChange={(event) => setPetType(event.target.value)}>
             <option value="">Select Pet Type...</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
           </select>
         <br/>
-        <label>Image URL</label>
+        <label>Image URL:</label>
           <input
             type="url"
             onChange={(event) => setURL(event.target.value)}
@@ -245,77 +245,85 @@ export const Admin = ({adminPrivileges, setAdminPrivileges}) => {
      <div className="admin-c">
 
       <div>
-        <form onSubmit={handleEdit}>
+        <form className="edit" onSubmit={handleEdit}>
           <label>
-            <p>Product Id</p>
+            Product Id:
+            </label>
             <input
             type='text'
             onChange={event => setProductId(event.target.value)}
             placeholder='Enter Product Id'
             />
-          </label>
+          
           <label>
-          <p>Name</p>
+          Name:
+          </label>
           <input 
             type="text" 
             onChange={event => setTitle(event.target.value)} 
             placeholder="Name..."
           />
-        </label>
+        
         <label>
-          <p>Description</p>
+          Description:
+        </label>
           <input 
             type="text" 
             onChange={event => setDescription(event.target.value)} 
             placeholder="Description..."
           />
-        </label>
+       
         <label>
-          <p>Price</p>
+          Price:
+        </label>
           <input 
             type="number" 
             onChange={event => setPrice(event.target.value)} 
             placeholder="Price..."
           />
-        </label>
+       
         <label>
-          <p>Inventory</p>
+          Inventory:
+        </label>
           <input 
             type="number" 
             onChange={event => setInventory(event.target.value)} 
             placeholder="Inventory..."
           />
-        </label>
+        
         <label>
-          <p>Pet Type</p>
+          Pet Type:
+       </label>
           <input 
             type="text" 
             onChange={event => setPetType(event.target.value)} 
             placeholder="Pet Type..."
           />
-        </label>
+       
         <label>
-          <p>Image URL</p>
+          Image URL:
+          </label>
           <input 
             type="text" 
             onChange={event => setURL(event.target.value)} 
             placeholder="URL Link..."
           />
-        </label>
+        
         <button 
             type="submit">
-              Edit Product
+              Edit Product:
           </button>
         </form>
-        <form onSubmit = {handleDelete}>
+        <form className="delete" onSubmit = {handleDelete}>
           <label>
-            <p> Delete Product</p>
+           Delete Product:
+           </label>
             <input
             type = "number"
             onChange = {event => setProductId(event.target.value)}
-            placeholder ="Delete Product"
+            placeholder ="Enter Product Number"
             />
-          </label>
+          
           <button
           type ="submit">
             Delete Product
@@ -332,33 +340,37 @@ export const Admin = ({adminPrivileges, setAdminPrivileges}) => {
             <form onSubmit={handleUser}>
               <div>
                 <label>
-                  <p>Add Engineer</p>
+                  Add Engineer:
+                </label>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsEngineer(true)}
                   />
-                </label>
+                <br></br>
                 <label>
-                  <p>Add Admin</p>
+                 Add Admin:
+                  </label>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsAdmin(true)}
                   />
-                </label>
+                
                 <label>
-                  <p>Remove Engineer</p>
+                  Remove Engineer:
+                  </label>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsEngineer(false)}
                   />
-                </label>
+                
                 <label>
-                  <p>Remove Admin</p>
+                 Remove Admin:
+                  </label>
                   <input
                     type="checkbox"
                     onChange={(event) => setIsAdmin(false)}
                   />
-                </label>
+                
               </div>
               <button type="submit">Click TWICE to Submit</button>
               <input value={user.id} className="hidden" />

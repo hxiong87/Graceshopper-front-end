@@ -171,10 +171,7 @@ button[type='submit']:hover {
   grid-row: 1/ 3;
 }
 
-/* .review-img {
- 
- 
-} */
+
 
 .item5 {
   background-color: #f4f1ed;
@@ -209,9 +206,9 @@ button[type='submit']:hover {
   flex-direction: column;
 }
 
-.add-product {
+.add-product , .delete, .edit{
   background-color: #f4f1ed;
-  text-align: center;
+  
   border: 1px solid black;
   margin: 0 auto;
   padding: 20px;
@@ -225,17 +222,16 @@ button[type='submit']:hover {
   flex-direction: column;
   flex: 6;
   min-width: 50vw;
+
+  
 }
-.admin-c {
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid black;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  min-height: 50vh;
-  flex: 5;
+
+.admin-container {
+ padding-left: 50%;
+  align-items: center;
+  justify-content: center;
 }
+
 
 
 .address, .credit-card{
@@ -274,21 +270,7 @@ button[type='submit']:hover {
   min-width: 50vw;
 }
 
-/* .login-container {
-  position: fixed;
 
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  backdrop-filter: blur(3px);
-  background: rgba(0, 0, 0, 0.4);
-
-  font-family: 'Roboto', sans-serif;
-  font-size: 2rem;
-  text-align: center;
-} */
 .product-grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -340,6 +322,9 @@ button[type='submit']:hover {
 
 .search-label {
   padding-right: 5px;
+  padding-left: 10px;
+ text-transform: uppercase;
+  
 }
 
 .search-dropdown {
@@ -353,4 +338,16 @@ button[type='submit']:hover {
 
 .hidden{
   display: none;
+}
+
+.main {
+  display: flex;
+  align-content: center;
+}
+
+.personal-info {
+  padding-left: 40vw;
+  align-items: center;
+  justify-content: center;
+
 }

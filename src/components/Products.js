@@ -84,7 +84,7 @@ export const Products = () => {
   return (
     <div>
           <div className='SearchBar'>
-        <label className='search-label'>Pet Type:</label>
+        <label className='search-label'>PET TYPE:</label>
         <select className='search-dropdown' value={petType} onChange={handlePetTypeChange}>
           <option value="All">All</option>
           <option value="Dog">Dog</option>
@@ -128,6 +128,7 @@ export const Products = () => {
                       value={quantity}
                     />
                     <button type="submit">Add to Cart</button>
+                   
                   </form>
                 </div>
               </div>
