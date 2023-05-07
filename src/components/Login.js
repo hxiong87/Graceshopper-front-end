@@ -1,52 +1,57 @@
 import React, { useState } from "react";
 import { API_URL } from '../config';
+import { Navigate } from 'react-router-dom';
 
 async function loginUser(credentials) {
-    console.log(credentials)
-    return fetch(`${API_URL}/users/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
+  console.log(credentials)
+  return fetch(`${API_URL}/users/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result);
+      if (result.message === "User does not exist") {
+        window.alert("Username does not exist")
+      }
+      if (result.message === "Password is incorrect") {
+        window.alert("Password incorrect")
+      }
+      return result
     })
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        if (result.message === "User does not exist") {
-          window.alert("Username does not exist")
-        }
-        if (result.message === "Password is incorrect") {
-          window.alert("Password incorrect")
-        }
-        return result
-      })
-      .catch(console.error);
-  }
-
-
+    .catch(console.error);
+}
 
 export const Login = ({ user, setUser }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const handleSubmit = async (event) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
 
-        event.preventDefault();
-        console.log("this is login", email, password)
-        const userObj = await loginUser({
-          email,
-          password
-        });
-        
-        console.log("login userObj", userObj.token, userObj.user.email)
-        window.localStorage.setItem('token', userObj.token)
-        window.localStorage.setItem('userEmail', userObj.user.email)
-        window.localStorage.setItem('userId', userObj.user.id)
-        const userId = localStorage.getItem("userId");
-        const token = localStorage.getItem("token");
-      setUser([userObj.user.email, userObj.user.id]);
-      // window.location.assign("/profile")
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("this is login", email, password)
+    const userObj = await loginUser({
+      email,
+      password
+    });
+    console.log("login userObj", userObj.token, userObj.user.email)
+    window.localStorage.setItem('token', userObj.token)
+    window.localStorage.setItem('userEmail', userObj.user.email)
+    window.localStorage.setItem('userId', userObj.user.id)
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+    setUser([userObj.user.email, userObj.user.id]);
+    setLoggedIn(true);
+  }
+
+  if (loggedIn) {
+    return <Navigate to="/profile" />;
+  }
+ 
+
     return(
       <div className="login-container">
       
