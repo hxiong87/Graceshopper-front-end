@@ -71,7 +71,7 @@ async function fetchMe(userId, token) {
 //   }
 // }
 
-export const Profile = ({token}) => {
+export const Profile = ({token}) => { 
   const [address, setAddress] = useState('');
   const [aptNum, setAptNum] = useState('');
   const [city, setCity] = useState('');
@@ -82,6 +82,12 @@ export const Profile = ({token}) => {
   const [expDate, setExpDate] = useState('');
   const [secCode, setSecCode] = useState('');
   const [profile, setProfile] = useState('');
+
+
+
+
+
+
   
 
   const handleSubmit= async (event) => {
@@ -95,27 +101,19 @@ export const Profile = ({token}) => {
       card,
       cardName,
       expDate,
-      secCode
-    }
-   }
-    // useEffect(() => {
-    //   setProfile(personalInfo)
-    //   // getProfile()
-    // },[])
+      secCode,
+       
+     
+    
+    };
+   };
 
-    // await editInfo (token,personalInfo) 
-    // try {
-    //   const response = await fetch (`${API_URL}/users/me`)
-    //   let result = await response.json();
-    //   setProfile (personalInfo)
-    // }
-    // catch (error) {
-    //   console.error(error);
-    // }
 
- 
 
-    return (
+
+
+
+   return (
       <div className="personal-info">
       <form className="address" onSubmit={handleSubmit}>
         <h3> Edit Address:</h3>
@@ -189,5 +187,5 @@ export const Profile = ({token}) => {
         <button type="submit"> Save card info</button>
       </form>
       </div>
-    )
-    }
+    ) 
+   };
