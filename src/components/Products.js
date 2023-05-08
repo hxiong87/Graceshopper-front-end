@@ -62,7 +62,7 @@ export const Products = () => {
 
   const handleAdd = async (event) => {
     event.preventDefault();
-    console.log('Product Id', event.target[2].value);
+    console.log('Product Id', event);
     console.log('UUUUUUUUUUUUU', quantity, userId);
     setProductId(event.target[2].value);
     const obj = { userId: userId, productId: productId, quantity: quantity };
@@ -74,8 +74,8 @@ export const Products = () => {
   };
 
   const handleClick = async (event) => {
-    console.log('This is new', event);
-    // window.localStorage.setItem('setting productId', productId)
+    console.log('This is new', event.target.lastChild.value);
+    window.localStorage.setItem('Product Id', event.target.lastChild.value)
   };
   const filteredProducts =
     petType === 'All'
@@ -110,6 +110,7 @@ export const Products = () => {
                     to={`/products/${product.id}`}
                   >
                     {product.title}
+                    <input value={product.id} class="hidden"></input>
                   </Link>
                   <Routes>
                     <Route
@@ -128,7 +129,7 @@ export const Products = () => {
                       value={quantity}
                     />
                     <button type="submit">Add to Cart</button>
-                   
+                    <input value={product.id} class="hidden"></input>
                   </form>
                 </div>
               </div>
